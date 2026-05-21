@@ -19,9 +19,10 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: "8.2"
+          tools: phpunit
 
       - name: Run Unit Tests
-        run: php tests/SampleTest.php
+        run: phpunit --configuration phpunit.xml
 
   code-quality:
     name: Static Code Analysis
@@ -61,8 +62,7 @@ jobs:
           phpcs --standard=PSR2 \
                 --extensions=php \
                 --ignore=vendor \
-                wp-content/themes/my-theme/functions.php \
-          || true
+                wp-content/themes/my-theme/functions.php
 
   build-and-push:
     name: Build Docker Image
