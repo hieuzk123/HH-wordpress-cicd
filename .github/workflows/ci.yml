@@ -45,16 +45,29 @@ jobs:
           cat > wp-content/themes/my-theme/functions.php << 'EOF'
           <?php
           /**
-           * Theme functions
+           * Theme setup class
            *
            * @package MyTheme
            */
 
-          function my_theme_setup() {
-              add_theme_support( 'title-tag' );
-              add_theme_support( 'post-thumbnails' );
+          namespace MyTheme;
+
+          /**
+           * Class ThemeSetup
+           */
+          class ThemeSetup
+          {
+              /**
+               * Setup theme features
+               *
+               * @return void
+               */
+              public function setup()
+              {
+                  add_theme_support('title-tag');
+                  add_theme_support('post-thumbnails');
+              }
           }
-          add_action( 'after_setup_theme', 'my_theme_setup' );
           EOF
 
       - name: Run PHPCS
